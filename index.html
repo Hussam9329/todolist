@@ -1,213 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
-  <title>🌈 To-Do List Ultra</title>
-  <style>
-    /* ✨ الجسم الأساسي للصفحة — هنا يتم رسم الخلفية ونمط التوسيط */
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #fdfbfb, #ebedee); /* لا تغير هالميل إلا إذا عندك ذوق جهنمي */
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+  <title>تحقق من الرمز</title>
+  <script>
+    function checkCode() {
+      const userCode = document.getElementById("code").value;
+      const correctCode = "1234"; // غيّر هذا الرمز حسب اللي تريده
 
-    /* 🔮 الصندوق الرئيسي للـ To-Do — هنا روح التصميم */
-    .todo-box {
-      background: #ffffffcc; /* شفاف ناعم - يخلي شكل الواجهة خرافي */
-      backdrop-filter: blur(15px); /* تأثير زجاجي - لا تمسه إلا إذا تعرف بالـ UI blur levels */
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); /* ظل خفيف - يشبه واجهات الموبايل */
-      border-radius: 25px; /* زوايا ناعمة - لا تسويها مربعة إلا إذا تشتغل على DOS */
-      width: 400px;
-      padding: 30px 25px;
-      transition: all 0.3s ease-in-out;
+      if (userCode === correctCode) {
+        window.location.href = "home.html"; // الصفحة اللي راح يروح لها
+      } else {
+        alert("رمز خطأ، حاول مرة ثانية");
+      }
     }
-
-    .todo-box:hover {
-      transform: scale(1.01); /* مجرد تلميحة بصرية - لا تكثر الزوم */
-    }
-
-    /* 🧠 العنوان العلوي - إذا ردت تغيره غيره من الهيدر */
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #444;
-      letter-spacing: 1px;
-    }
-
-    /* 🎯 صف الإدخال والأزرار */
-    .input-row {
-      display: flex;
-      gap: 10px; /* المسافة بين الحقل والزر */
-      margin-bottom: 20px;
-    }
-
-    /* 🧾 حقل إضافة المهمة */
-    input[type="text"] {
-      flex: 1;
-      padding: 12px 15px;
-      border: 2px solid #ddd;
-      border-radius: 15px;
-      outline: none;
-      font-size: 16px;
-      transition: border 0.3s;
-    }
-
-    input[type="text"]:focus {
-      border-color: #8e44ad; /* اذا تحب لون ثاني غير بنفسجي، بس ديربالك يتعارض ويا الزر */
-    }
-
-    /* 🔘 زر الإضافة - تقدر تتحكم بلونه وحجمه من هنا */
-    button.add-btn {
-      background: #8e44ad;
-      color: #fff;
-      border: none;
-      padding: 12px 18px;
-      border-radius: 15px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-
-    button.add-btn:hover {
-      background: #732d91;
-    }
-
-    /* 📜 لستة المهام */
-    ul {
-      list-style: none;
-      max-height: 300px;
-      overflow-y: auto;
-      padding-right: 5px;
-    }
-
-    /* ⚙️ شريط التمرير – خفيف وما يزعج */
-    ul::-webkit-scrollbar {
-      width: 5px;
-    }
-
-    ul::-webkit-scrollbar-thumb {
-      background-color: #ccc;
-      border-radius: 10px;
-    }
-
-    /* 🧱 تصميم كل عنصر بالمهمة */
-    li {
-      background: #fff;
-      padding: 12px 15px;
-      margin-bottom: 10px;
-      border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: background 0.3s;
-    }
-
-    /* ✅ الشكل إذا صارت المهمة مكتملة */
-    li.done {
-      background: #dff9fb;
-      text-decoration: line-through;
-      color: #7f8c8d;
-    }
-
-    /* 🎛️ مجموعة الأزرار الجانبية (تم - حذف) */
-    .btns {
-      display: flex;
-      gap: 8px;
-    }
-
-    /* 🔘 زر التحديد كمُنجز */
-    .btns .done-btn {
-      background: #27ae60;
-      color: white;
-      border: none;
-      padding: 6px 10px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 12px;
-      transition: 0.3s;
-    }
-
-    .btns .done-btn:hover {
-      background: #1e8449;
-    }
-
-    /* 🔴 زر الحذف */
-    .btns .delete-btn {
-      background: #e74c3c;
-      color: white;
-      border: none;
-      padding: 6px 10px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 12px;
-      transition: 0.3s;
-    }
-
-    .btns .delete-btn:hover {
-      background: #c0392b;
-    }
-  </style>
+  </script>
 </head>
 <body>
-
-  <!-- 🧱 هذا هو الصندوق الرئيسي للواجهة – لا تلمسه إلا إذا تريد تسوي ريفريش كامل للتصميم -->
-  <div class="todo-box">
-    <h2>🌟 To-Do List Ultra</h2>
-
-    <!-- 🛠️ هنا يتم إدخال المهمات -->
-    <div class="input-row">
-      <input type="text" id="taskInput" placeholder="Add your next masterpiece...">
-      <button class="add-btn" onclick="addTask()">Add</button>
-    </div>
-
-    <!-- 📋 هنا يتم عرض المهمات اللي تنضاف -->
-    <ul id="taskList"></ul>
-  </div>
-
-  <script>
-    // ✅ دالة لإضافة مهمة - إذا حاب تسوي تحسين (مثلاً يمنع تكرار المهمة)، ضيفه هنا
-    function addTask() {
-      const taskInput = document.getElementById("taskInput");
-      const taskText = taskInput.value.trim();
-
-      // 🚫 منع إضافة مهمة فارغة
-      if (taskText === "") return;
-
-      // 🧱 إنشاء عنصر المهمة
-      const li = document.createElement("li");
-      li.innerHTML = `
-        ${taskText}
-        <div class="btns">
-          <button class="done-btn" onclick="toggleDone(this)">Done</button>
-          <button class="delete-btn" onclick="deleteTask(this)">Delete</button>
-        </div>
-      `;
-
-      // ➕ إضافة المهمة إلى القائمة
-      document.getElementById("taskList").appendChild(li);
-
-      // 🧽 مسح الحقل بعد الإضافة
-      taskInput.value = "";
-    }
-
-    // 🔄 دالة لتبديل حالة المهمة (مكتملة / غير مكتملة)
-    function toggleDone(btn) {
-      const li = btn.parentElement.parentElement;
-      li.classList.toggle("done");
-    }
-
-    // ❌ دالة لحذف المهمة
-    function deleteTask(btn) {
-      const li = btn.parentElement.parentElement;
-      li.remove();
-    }
-
-    // ⚠️ ملاحظة: إذا ردت تخزن المهام بين الجلسات استخدم localStorage
-    // بس لا تنسى تسوي load للبيانات عند تشغيل الصفحة همين
-  </script>
+  <h2>ادخل الرمز للوصول</h2>
+  <input type="password" id="code" placeholder="اكتب الرمز هنا">
+  <button onclick="checkCode()">دخول</button>
 </body>
 </html>
